@@ -1,0 +1,32 @@
+---
+- name: Clone quikdex repository
+  git:
+    repo: 'https://github.com/quiknode-labs/interview-q-1.git'
+    dest: /opt/quikdex
+    version: master
+
+- name: Install npm dependencies
+  npm:
+    path: /opt/quikdex
+
+- name: Configure database connection for production
+  template:
+    src: config.json.j2
+    dest: /opt/quikdex/config/config.json
+
+- name: Create production database
+  command: ./node_modules/.bin/sequelize db:create --env production
+  args:
+    chdir: /opt/quikdex
+
+- name: Run database migrations
+  command: ./node_modules/.bin/sequelize db:migrate --env production
+  args:
+    chdir: /opt/quikdex
+
+- name: Start quikdex application
+  shell: npm run tart
+  args:
+    chdir: /opt/quikdex
+  async: 15
+  poll: 0

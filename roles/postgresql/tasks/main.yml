@@ -1,0 +1,21 @@
+---
+- name: Install PostgreSQL
+  apt:
+    name: postgresql
+    state: present
+
+- name: Ensure PostgreSQL is running
+  service:
+    name: postgresql
+    state: started
+    enabled: yes
+
+- name: Create PostgreSQL user
+  postgresql_user:
+    name: dex_user
+    password: secure_password
+
+- name: Create PostgreSQL database
+  postgresql_db:
+    name: dex_db
+    owner: dex_user

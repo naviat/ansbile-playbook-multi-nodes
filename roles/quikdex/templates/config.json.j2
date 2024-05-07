@@ -1,0 +1,30 @@
+{
+	"development": {
+	  "username": "{{ db_user }}",
+	  "password": "{{ db_password }}",
+	  "database": "quikdex_development",
+	  "host": "{{ db_host }}",
+	  "dialect": "postgres"
+	},
+	"test": {
+	  "username": "{{ db_user }}",
+	  "password": "{{ db_password }}",
+	  "database": "quikdex_test",
+	  "host": "{{ db_host }}",
+	  "dialect": "postgres"
+	},
+	"production": {
+	  "username": "{{ db_user }}",
+	  "password": "{{ db_password }}",
+	  "database": "quikdex_production",
+	  "host": "{{ db_host }}",
+	  "dialect": "postgres",
+	  "port": "{{ db_port }}",
+	  "dialectOptions": {
+		"ssl": {
+		  "rejectUnauthorized": false
+		}
+	  }
+	}
+  }
+  
